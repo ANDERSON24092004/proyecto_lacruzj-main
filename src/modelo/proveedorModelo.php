@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use Exception;
 
-class Proveedor extends conexion {
+class proveedorModelo extends conexion {
     private $id_proveedores;
     private $direccion;
     private $nombre;

@@ -3,7 +3,7 @@ namespace src\modelo;
 use FPDF;
 
 
-class CuentasCobrarPDFModelo extends FPDF {
+class cuentasCobrarPDFModelo extends FPDF {
     private $cuentaData;
     private $logoPath;
     private $firmaPath;

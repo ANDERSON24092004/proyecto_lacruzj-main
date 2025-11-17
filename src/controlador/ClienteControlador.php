@@ -1,13 +1,15 @@
 <?php
-require_once 'modelo/ClienteModelo.php';
-require_once 'controlador/verificar_sesion.php';
+
+use src\modelo\clienteModelo;
+
+require_once 'src/controlador/verificar_sesion.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-$clienteModel = new ClienteModel();
+$clienteModel = new clienteModelo();
 
 switch ($metodo) {
     case 'index':
@@ -18,11 +20,11 @@ switch ($metodo) {
             $clienteActual = $clienteModel->obtener($id);
         }
         
-        require 'vista/clientes/index.php';
+        require 'src/vista/clientes/index.php';
         break;
 
     case 'crear':
-        require 'vista/clientes/crear.php';
+        require 'src/vista/clientes/crear.php';
         break;
 
     
@@ -58,7 +60,7 @@ switch ($metodo) {
             exit;
         }
         
-        require 'vista/clientes/index.php';
+        require 'src/vista/clientes/index.php';
         break;
 
     case 'guardarAjax':

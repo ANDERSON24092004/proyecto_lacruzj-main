@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use Exception;
 
-class ProductoServicio extends conexion
+class productoServicioModelo extends conexion
 {
     private $id_inv;
     private $id_pres;

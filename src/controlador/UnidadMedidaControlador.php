@@ -1,5 +1,5 @@
 <?php
-require_once 'modelo/UnidadMedidaModelo.php';
+use src\modelo\unidadMedidaModelo;
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -17,17 +17,17 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$unidadMedida = new UnidadMedida();
+$unidadMedida = new unidadMedidaModelo();
 $activeTab = $_GET['tab'] ?? $_POST['tab'] ?? 'unidades';
 
 switch ($metodo) {
     case 'index':
         $unidades = $unidadMedida->listar();
-        require 'vista/configuracion/index.php';
+        require 'src/vista/configuracion/index.php';
         break;
         
     case 'crear':
-        require 'vista/configuracion/index.php';
+        require 'src/vista/configuracion/index.php';
         break;
         
     case 'listarAjax':

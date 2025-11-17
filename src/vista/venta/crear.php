@@ -1,4 +1,4 @@
-<?php require_once 'vista/parcial/header.php'; ?>
+<?php require_once 'src/vista/parcial/header.php'; ?>
 
 <div class="container mt-4">
     <h2>Registrar Nueva Venta</h2>
@@ -97,4 +97,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<?php require_once 'vista/parcial/footer.php'; ?>
+<?php require_once 'src/vista/parcial/footer.php'; ?>

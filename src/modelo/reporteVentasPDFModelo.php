@@ -3,7 +3,7 @@
 namespace src\modelo;
 use FPDF;
 
-class ReporteVentasPDFModelo extends FPDF {
+class reporteVentasPDFModelo extends FPDF {
     private $datosReporte;
     private $tipoReporte;
     

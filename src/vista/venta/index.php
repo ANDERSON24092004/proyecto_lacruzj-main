@@ -1,4 +1,4 @@
-<?php include 'vista/parcial/header.php'; ?>
+<?php include 'src/vista/parcial/header.php'; ?>
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -38,5 +38,5 @@
     <?php endif; ?>
 </div>
 
-<?php include 'vista/parcial/footer.php'; ?>
+<?php include 'src/vista/parcial/footer.php'; ?>
 

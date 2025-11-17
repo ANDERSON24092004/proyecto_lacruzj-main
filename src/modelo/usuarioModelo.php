@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use Exception;
 
-class Usuario extends conexion {
+class usuarioModelo extends conexion {
 
     private $cedula;
     private $id_rol;

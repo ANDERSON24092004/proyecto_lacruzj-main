@@ -1,12 +1,14 @@
 <?php
-require_once 'modelo/Usuario.php';
+use src\modelo\usuarioModelo;
 
-function isAjaxRequest() {
-    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+function isAjaxRequest()
+{
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-function sendJsonResponse($success, $message, $details = '', $data = []) {
+function sendJsonResponse($success, $message, $details = '', $data = [])
+{
     header('Content-Type: application/json');
     echo json_encode([
         'success' => $success,
@@ -17,18 +19,18 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$usuario = new Usuario();
+$usuario = new usuarioModelo();
 
 switch ($metodo) {
-    case 'index':    
-        require 'vista/usuario/index.php';
+    case 'index':
+        require 'src/vista/usuario/index.php';
         break;
 
     case 'listar':
         if (!isAjaxRequest()) {
             sendJsonResponse(false, "Acceso no permitido");
         }
-        
+
         try {
             $usuarios = $usuario->listar();
             sendJsonResponse(true, "Datos cargados", "", $usuarios);
@@ -41,7 +43,7 @@ switch ($metodo) {
         if (!isAjaxRequest()) {
             sendJsonResponse(false, "Acceso no permitido");
         }
-        
+
         $roles = $usuario->listarRol();
         sendJsonResponse(true, "Roles cargados", "", $roles);
         break;
@@ -50,9 +52,9 @@ switch ($metodo) {
         if (!isAjaxRequest()) {
             sendJsonResponse(false, "Acceso no permitido");
         }
-        
+
         error_log("Datos POST recibidos para usuario: " . print_r($_POST, true));
-        
+
         $cedula = $_POST['cedula'] ?? '';
         $id_rol = $_POST['id_rol'] ?? '';
         $nombre = $_POST['nombre'] ?? '';
@@ -62,7 +64,7 @@ switch ($metodo) {
 
         try {
             $claveHash = password_hash($clave, PASSWORD_DEFAULT);
-            
+
             if ($usuario->registrar($cedula, $id_rol, $nombre, $telefono, $correo, $claveHash)) {
                 sendJsonResponse(true, "Usuario registrado correctamente", "El usuario ha sido registrado exitosamente en el sistema");
             }
@@ -71,19 +73,19 @@ switch ($metodo) {
             sendJsonResponse(false, "Error al registrar el usuario", $e->getMessage());
         }
         break;
-            
+
     case 'editar':
         $cedula = $_GET['cedula'] ?? null;
         if (!$cedula) {
             sendJsonResponse(false, "La cédula no es proporcionada");
         }
-        
+
         $usuarioData = $usuario->buscarPorId($cedula);
 
         if (!$usuarioData) {
             sendJsonResponse(false, "Usuario no encontrado");
         }
-           
+
         sendJsonResponse(true, "Datos del usuario", "", [
             'cedula' => $usuarioData['cedula'],
             'id_rol' => $usuarioData['id_rol'],
@@ -91,13 +93,13 @@ switch ($metodo) {
             'telefono' => $usuarioData['telefono'],
             'correo' => $usuarioData['correo']
         ]);
-        break;  
-           
+        break;
+
     case 'actualizar':
         if (!isAjaxRequest()) {
             sendJsonResponse(false, "Acceso no permitido");
         }
-        
+
         $cedula = $_POST['cedula'] ?? null;
         $id_rol = $_POST['id_rol'] ?? '';
         $nombre = $_POST['nombre'] ?? '';
@@ -118,33 +120,33 @@ switch ($metodo) {
         if (!isAjaxRequest()) {
             sendJsonResponse(false, "Acceso no permitido");
         }
-        
+
         $cedula = $_POST['cedula'] ?? null;
-        
+
         try {
             if ($usuario->eliminar($cedula)) {
                 $usuarioData = $usuario->buscarPorId($cedula);
                 $nombreUsuario = $usuarioData ? $usuarioData['username'] : 'Usuario';
-                
+
                 sendJsonResponse(true, "Usuario eliminado correctamente", "El usuario " . htmlspecialchars($nombreUsuario) . " ha sido eliminado del sistema");
             }
         } catch (Exception $e) {
             sendJsonResponse(false, "Error al eliminar el usuario", $e->getMessage());
         }
         break;
-    
+
     case 'verificarNombre':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nombre = $_POST['nombre'] ?? '';
             $cedula = $_POST['cedula'] ?? null;
-            
+
             header('Content-Type: application/json');
-            
+
             if (empty($nombre)) {
                 echo json_encode(['disponible' => false]);
                 exit;
             }
-            
+
             $disponible = $usuario->verificarNombreDisponible($nombre, $cedula);
             echo json_encode(['disponible' => $disponible]);
         }
@@ -160,7 +162,7 @@ switch ($metodo) {
             header("Location: index.php?c=loginControlador&m=home");
             exit;
         }
-        
+
         $usuarioData = $usuario->buscarPorId($cedulaUsuario);
         if (!$usuarioData) {
             $_SESSION['tipo_mensaje'] = "error";
@@ -169,13 +171,13 @@ switch ($metodo) {
             header("Location: index.php?c=loginControlador&m=home");
             exit;
         }
-        
+
         $roles = $usuario->listarRol();
         require 'vista/usuario/perfil.php';
         break;
 
     case 'actualizarPerfil':
-        
+
         $cedula = $_SESSION['usuario']['cedula'] ?? null;
         $id_rol = $_POST['id_rol'] ?? '';
         $nombre = $_POST['nombre'] ?? '';
@@ -191,11 +193,11 @@ switch ($metodo) {
                 if (!$usuarioData || !password_verify($clave_actual, $usuarioData['clave'])) {
                     throw new Exception("La contraseña actual es incorrecta");
                 }
-                
+
                 if ($clave_nueva !== $confirmar_clave) {
                     throw new Exception("Las contraseñas nuevas no coinciden");
                 }
-                
+
                 $clave = $clave_nueva;
             } else {
                 $clave = null;
@@ -204,7 +206,7 @@ switch ($metodo) {
             if ($usuario->actualizar($cedula, $id_rol, $nombre, $telefono, $correo, $clave)) {
                 $_SESSION['usuario']['username'] = $nombre;
                 $_SESSION['usuario']['id_rol'] = $id_rol;
-                
+
                 sendJsonResponse(true, "Perfil actualizado correctamente", "Tus datos han sido actualizados exitosamente");
             }
         } catch (Exception $e) {
@@ -213,7 +215,6 @@ switch ($metodo) {
         break;
 
     default:
-        require_once 'vista/usuario/index.php';
+        require_once 'src/vista/usuario/index.php';
         break;
 }
-?>

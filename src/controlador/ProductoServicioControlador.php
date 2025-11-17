@@ -1,9 +1,10 @@
 <?php
-require_once 'modelo/ProductoServicioModelo.php';
-require_once 'modelo/UnidadMedidaModelo.php';
-require_once 'modelo/PresentacionModelo.php';
-require_once 'modelo/MateriaPrimaModelo.php';
-require_once 'controlador/verificar_sesion.php';
+
+use src\modelo\productoServicioModelo;
+use src\modelo\unidadMedidaModelo;
+use src\modelo\presentacionModelo;
+use src\modelo\materiaPrimaModelo;
+require_once 'src/controlador/verificar_sesion.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -21,16 +22,16 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$productoServicio = new ProductoServicio();
-$unidadMedida = new UnidadMedida();
-$presentacion = new Presentacion();
-$materiaPrima = new MateriaPrima();
+$productoServicio = new productoServicioModelo();
+$unidadMedida = new unidadMedidaModelo();
+$presentacion = new presentacionModelo();
+$materiaPrima = new materiaPrimaModelo();
 
 switch ($metodo) {
     case 'index':
         $unidades = $unidadMedida->listar();
         $presentaciones = $presentacion->listar();
-        require 'vista/producto-servicio/index.php';
+        require 'src/vista/producto-servicio/index.php';
         break;
 
     case 'listar':
@@ -79,7 +80,7 @@ switch ($metodo) {
                     
                     $productoServicio->setEsFabricado(isset($_POST['es_fabricado']) ? 1 : 0);
                     
-                    $presentacionModel = new Presentacion();
+                    $presentacionModel = new presentacionModelo();
                     $id_pres = $presentacionModel->buscarIdPorNombre($_POST['presentacion']);
                     if (!$id_pres) {
                         throw new Exception("Presentación no válida: " . $_POST['presentacion']);
@@ -101,7 +102,7 @@ switch ($metodo) {
                     $productoServicio->setPrecioMayor(0);
                     $productoServicio->setEsFabricado(0);
                     
-                    $presentacionModel = new Presentacion();
+                    $presentacionModel = new presentacionModelo();
                     $id_pres_no_aplica = $presentacionModel->buscarIdPorNombre('No aplica');
                     if (!$id_pres_no_aplica) {
                         throw new Exception("No se encontró la presentación 'No aplica'");
@@ -224,7 +225,7 @@ switch ($metodo) {
                     $esFabricado = isset($_POST['es_fabricado']) ? 1 : 0;
                     $productoServicio->setEsFabricado($esFabricado);
                     
-                    $presentacionModel = new Presentacion();
+                    $presentacionModel = new presentacionModelo();
                     $id_pres = $presentacionModel->buscarIdPorNombre($_POST['presentacion']);
                     if (!$id_pres) {
                         throw new Exception("Presentación no válida");
@@ -249,7 +250,7 @@ switch ($metodo) {
                     $productoServicio->setEsFabricado(0);
                     $productoServicio->setMateriasPrimas([]);
                     
-                    $presentacionModel = new Presentacion();
+                    $presentacionModel = new presentacionModelo();
                     $id_pres_no_aplica = $presentacionModel->buscarIdPorNombre('No aplica');
                     if (!$id_pres_no_aplica) {
                         throw new Exception("No se encontró la presentación 'No aplica' en el sistema");

@@ -6,7 +6,7 @@ use PDOException;
 use Exception;
 
 
-class PresupuestoModel extends conexion {
+class presupuestoModelo extends conexion {
     private $nro_presupuesto;
     private $rif;
     private $numero_orden;

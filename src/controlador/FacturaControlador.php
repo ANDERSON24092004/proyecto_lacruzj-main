@@ -1,11 +1,13 @@
 <?php
-require_once 'modelo/FacturaModelo.php';
-require_once 'modelo/ClienteModelo.php';
-require_once 'modelo/ProductoServicioModelo.php';
-require_once 'modelo/CondicionPagoModelo.php';
-require_once 'modelo/DescuentoModelo.php';
-require_once 'modelo/IvaModelo.php';
-require_once 'controlador/verificar_sesion.php';
+
+use src\modelo\facturaModelo;
+use src\modelo\clienteModelo;
+use src\modelo\productoServicioModelo;
+use src\modelo\facturaPDFModelo;
+use src\modelo\descuentoModelo;
+use src\modelo\ivaModelo;
+
+require_once 'src/controlador/verificar_sesion.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -23,11 +25,11 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$iva = new Iva();
-$facturaModelo = new FacturaModel();
-$clienteModelo = new ClienteModel();
-$productoServicioModelo = new ProductoServicio();
-$descuentoModelo = new Descuento();
+$iva = new ivaModelo();
+$facturaModelo = new facturaModelo();
+$clienteModelo = new clienteModelo();
+$productoServicioModelo = new productoServicioModelo();
+$descuentoModelo = new descuentoModelo();
 
 switch ($metodo) {
     case 'index':
@@ -46,7 +48,7 @@ switch ($metodo) {
             $condicionesPago = $facturaModelo->obtenerCondicionesPago();
             $descuentos = $facturaModelo->obtenerDescuentos();
             $facturas = $facturaModelo->listarFacturas();
-            require 'vista/factura/index.php';
+            require 'src/vista/factura/index.php';
         }
         break;
 
@@ -274,9 +276,6 @@ switch ($metodo) {
                 if (!$facturaData) {
                     throw new Exception("Factura no encontrada");
                 }
-                
-                require_once 'modelo/FacturaPDFModelo.php';
-            
                 $logoPath = 'assets/images/logo2.png';     
                 $firmaPath = 'assets/images/firma.jpeg';   
 
@@ -289,7 +288,7 @@ switch ($metodo) {
                     error_log("Firma no encontrada en: " . realpath($firmaPath));
                 }
                 
-                $pdf = new FacturaPDFModelo($facturaData, $logoPath, $firmaPath);
+                $pdf = new facturaPDFModelo($facturaData, $logoPath, $firmaPath);
                 $pdf->generarPDF();
                 
                 $pdf->Output('I', 'factura_' . $nro_fact . '.pdf');

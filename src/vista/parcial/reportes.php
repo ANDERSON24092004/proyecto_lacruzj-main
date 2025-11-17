@@ -333,7 +333,7 @@
     </div>
 </div>
 
-<?php require_once 'vista/parcial/mensaje_modal.php' ?>
-<?php require_once 'vista/parcial/footer.php' ?>
+<?php require_once 'src/vista/parcial/mensaje_modal.php' ?>
+<?php require_once 'src/vista/parcial/footer.php' ?>
 
 <script type="text/javascript" src="assets/js/reportes.js"></script>

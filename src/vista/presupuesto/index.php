@@ -1,4 +1,4 @@
-<?php require_once('vista/parcial/header.php'); ?>
+<?php require_once('src/vista/parcial/header.php'); ?>
 
 <div class="main-content">
     <div class="container-fluid py-4">
@@ -38,13 +38,13 @@
     </div>
 </div>
 
-<?php require_once('vista/parcial/mensaje_modal.php'); ?>
-<?php require_once('vista/presupuesto/ver.php'); ?>
-<?php require_once('vista/presupuesto/anular.php'); ?>
-<?php require_once('vista/presupuesto/reactivar.php'); ?>
-<?php require_once('vista/presupuesto/crear.php'); ?>
+<?php require_once('src/vista/parcial/mensaje_modal.php'); ?>
+<?php require_once('src/vista/presupuesto/ver.php'); ?>
+<?php require_once('src/vista/presupuesto/anular.php'); ?>
+<?php require_once('src/vista/presupuesto/reactivar.php'); ?>
+<?php require_once('src/vista/presupuesto/crear.php'); ?>
 
-<?php require_once('vista/parcial/footer.php'); ?>
+<?php require_once('src/vista/parcial/footer.php'); ?>
 
 <script type="text/javascript" src="assets/js/verPresupuesto.js"></script>
 <script type="text/javascript" src="assets/js/crearPresupuesto.js"></script>

@@ -1,5 +1,6 @@
 <?php
-require_once 'modelo/DescuentoModelo.php';
+
+use src\modelo\descuentoModelo;
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -17,7 +18,7 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$descuento = new Descuento();
+$descuento = new descuentoModelo();
 $activeTab = $_GET['tab'] ?? $_POST['tab'] ?? 'descuento';
 
 switch ($metodo) {
@@ -142,7 +143,7 @@ switch ($metodo) {
         
     default:
         $descuentos = $descuento->listar();
-        require 'vista/configuracion/index.php';
+        require 'src/vista/configuracion/index.php';
     break;
 }
 ?>

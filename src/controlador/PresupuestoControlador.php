@@ -1,10 +1,13 @@
 <?php
-require_once 'modelo/PresupuestoModelo.php';
-require_once 'modelo/ClienteModelo.php';
-require_once 'modelo/ProductoServicioModelo.php';
-require_once 'modelo/DescuentoModelo.php';
-require_once 'modelo/IvaModelo.php';
-require_once 'controlador/verificar_sesion.php';
+
+use src\modelo\clienteModelo;
+use src\modelo\productoServicioModelo;
+use src\modelo\descuentoModelo;
+use src\modelo\ivaModelo;
+use src\modelo\presupuestoModelo;
+use src\modelo\presupuestoPDFModelo;
+
+require_once 'src/controlador/verificar_sesion.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -22,11 +25,11 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$iva = new Iva();
-$presupuestoModelo = new PresupuestoModel();
-$clienteModelo = new ClienteModel();
-$productoServicioModelo = new ProductoServicio();
-$descuentoModelo = new Descuento();
+$iva = new ivaModelo();
+$presupuestoModelo = new presupuestoModelo();
+$clienteModelo = new clienteModelo();
+$productoServicioModelo = new productoServicioModelo();
+$descuentoModelo = new descuentoModelo();
 
 switch ($metodo) {
     case 'index':
@@ -44,7 +47,7 @@ switch ($metodo) {
             $servicios = $presupuestoModelo->obtenerServiciosDisponibles();
             $descuentos = $presupuestoModelo->obtenerDescuentos();
             $presupuestos = $presupuestoModelo->listarPresupuestos();
-            require 'vista/presupuesto/index.php';
+            require 'src/vista/presupuesto/index.php';
         }
         break;
 
@@ -295,9 +298,6 @@ switch ($metodo) {
                 if (!$presupuestoData) {
                     throw new Exception("Presupuesto no encontrado");
                 }
-                
-                require_once 'modelo/PresupuestoPDFModelo.php';
-            
                 $logoPath = 'assets/images/logo2.png';
                 
                 if (!file_exists($logoPath)) {
@@ -305,7 +305,7 @@ switch ($metodo) {
                     error_log("Logo no encontrado en: " . realpath($logoPath));
                 }
                 
-                $pdf = new PresupuestoPDFModelo($presupuestoData, $logoPath);
+                $pdf = new presupuestoPDFModelo($presupuestoData, $logoPath);
                 $pdf->generarPDF();
                 
                 $pdf->Output('I', 'presupuesto_' . $nro_presupuesto . '.pdf');

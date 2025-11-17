@@ -1,10 +1,12 @@
 <?php
-require_once 'modelo/FacturaCompraModelo.php';
-require_once 'modelo/DetalleFacturaCompraModelo.php';
-require_once 'modelo/ProveedorModelo.php';
-require_once 'modelo/MateriaPrimaModelo.php';
-require_once 'modelo/UnidadMedidaModelo.php';
-require_once 'controlador/verificar_sesion.php';
+
+use src\modelo\facturaCompraModelo;
+use src\modelo\detalleFacturaCompraModelo;
+use src\modelo\proveedorModelo;
+use src\modelo\materiaPrimaModelo;
+use src\modelo\unidadMedidaModelo;
+
+require_once 'src/controlador/verificar_sesion.php';
 
 function sendJsonResponse($success, $message, $message_detail = '', $data = []) {
     header('Content-Type: application/json');
@@ -17,11 +19,11 @@ function sendJsonResponse($success, $message, $message_detail = '', $data = []) 
     exit;
 }
 
-$facturaCompra = new FacturaCompra();
-$detalleFacturaCompra = new DetalleFacturaCompra();
-$proveedor = new Proveedor();
-$materiaPrima = new MateriaPrima();
-$unidadMedida = new UnidadMedida();
+$facturaCompra = new facturaCompraModelo();
+$detalleFacturaCompra = new detalleFacturaCompraModelo();
+$proveedor = new proveedorModelo();
+$materiaPrima = new materiaPrimaModelo();
+$unidadMedida = new unidadMedidaModelo();
 
 switch ($metodo) {
     case 'index':
@@ -29,7 +31,7 @@ switch ($metodo) {
         $materiasPrimas = $materiaPrima->listar();
         $unidadesMedida = $unidadMedida->listar();
         
-        require 'vista/facturaCompra/index.php';
+        require 'src/vista/facturaCompra/index.php';
         break;
 
     case 'listar':

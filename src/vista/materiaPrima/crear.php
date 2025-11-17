@@ -22,7 +22,8 @@
                             <select class="form-select" id="id_unidad_medida" name="id_unidad_medida">
                                 <option value="">Seleccionar unidad...</option>
                                 <?php
-                                $unidadMedida = new UnidadMedida();
+                                use src\modelo\unidadMedidaModelo;
+                                $unidadMedida = new unidadMedidaModelo();
                                 $unidades = $unidadMedida->listar();
                                 foreach ($unidades as $unidad):
                                 ?>

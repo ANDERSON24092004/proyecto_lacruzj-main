@@ -6,7 +6,7 @@ use PDO;
 use PDOException;
 use Exception;
 
-class ReporteServicioModelo extends FPDF {
+class reporteServicioModelo extends FPDF {
     private $datosReporte;
     
     public function __construct($datosReporte = []) {

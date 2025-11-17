@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 
 
-class Iva extends conexion {
+class ivaModelo extends conexion {
     private $id_iva;
     private $porcentaje;
 

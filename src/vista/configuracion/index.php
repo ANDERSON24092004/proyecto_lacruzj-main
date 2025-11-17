@@ -1,4 +1,4 @@
-<?php require_once('vista/parcial/header.php'); ?>
+<?php require_once('src/vista/parcial/header.php'); ?>
 
 <div class="main-content">
     <div class="container-fluid py-4">
@@ -233,26 +233,26 @@
     </div>
 </div>
 
-<?php require_once('vista/configuracion/unidades-de-medida/crear.php')?>
-<?php require_once('vista/configuracion/condicion-pago/crear.php')?>
-<?php require_once('vista/configuracion/iva/crear.php')?>
-<?php require_once('vista/configuracion/descuento/crear.php')?>
-<?php require_once('vista/configuracion/presentacion/crear.php')?>
+<?php require_once('src/vista/configuracion/unidades-de-medida/crear.php')?>
+<?php require_once('src/vista/configuracion/condicion-pago/crear.php')?>
+<?php require_once('src/vista/configuracion/iva/crear.php')?>
+<?php require_once('src/vista/configuracion/descuento/crear.php')?>
+<?php require_once('src/vista/configuracion/presentacion/crear.php')?>
 
-<?php require_once('vista/configuracion/unidades-de-medida/editar.php')?>
-<?php require_once('vista/configuracion/condicion-pago/editar.php')?>
-<?php require_once('vista/configuracion/iva/editar.php')?>
-<?php require_once('vista/configuracion/descuento/editar.php')?>
-<?php require_once('vista/configuracion/presentacion/editar.php')?>
+<?php require_once('src/vista/configuracion/unidades-de-medida/editar.php')?>
+<?php require_once('src/vista/configuracion/condicion-pago/editar.php')?>
+<?php require_once('src/vista/configuracion/iva/editar.php')?>
+<?php require_once('src/vista/configuracion/descuento/editar.php')?>
+<?php require_once('src/vista/configuracion/presentacion/editar.php')?>
 
-<?php require_once('vista/configuracion/unidades-de-medida/eliminar.php')?>
-<?php require_once('vista/configuracion/condicion-pago/eliminar.php')?>
-<?php require_once('vista/configuracion/iva/eliminar.php')?>
-<?php require_once('vista/configuracion/descuento/eliminar.php')?>
-<?php require_once('vista/configuracion/presentacion/eliminar.php')?>
+<?php require_once('src/vista/configuracion/unidades-de-medida/eliminar.php')?>
+<?php require_once('src/vista/configuracion/condicion-pago/eliminar.php')?>
+<?php require_once('src/vista/configuracion/iva/eliminar.php')?>
+<?php require_once('src/vista/configuracion/descuento/eliminar.php')?>
+<?php require_once('src/vista/configuracion/presentacion/eliminar.php')?>
 
-<?php require_once('vista/parcial/mensaje_modal.php'); ?>
-<?php require_once('vista/parcial/footer.php'); ?>
+<?php require_once('src/vista/parcial/mensaje_modal.php'); ?>
+<?php require_once('src/vista/parcial/footer.php'); ?>
 
 <script type="text/javascript" src="assets/js/mainCondicion.js"></script>
 <script type="text/javascript" src="assets/js/mainDescuento.js"></script>

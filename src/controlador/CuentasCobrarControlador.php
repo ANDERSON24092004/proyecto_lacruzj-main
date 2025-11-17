@@ -1,6 +1,8 @@
 <?php
-require_once 'modelo/CuentasCobrarModelo.php';
-require_once 'controlador/verificar_sesion.php';
+
+use src\modelo\cuentasCobrarModelo;
+use src\modelo\cuentasCobrarPDFModelo;
+require_once 'src/controlador/verificar_sesion.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -18,11 +20,11 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$cuentasModelo = new CuentasCobrarModel();
+$cuentasModelo = new cuentasCobrarModelo();
 
 switch ($metodo) {
     case 'index':    
-        require 'vista/cuentas_cobrar/index.php';
+        require 'src/vista/cuentas_cobrar/index.php';
         break;
 
     case 'listar':
@@ -164,8 +166,7 @@ switch ($metodo) {
                 $logoPath = 'assets/images/logo2.png';
                 $firmaPath = 'assets/images/firma.jpeg'; 
                 
-                require_once 'modelo/CuentasCobrarPDFModelo.php';
-                $pdf = new CuentasCobrarPDFModelo($datosPDF, $logoPath, $firmaPath);
+                $pdf = new cuentasCobrarPDFModelo($datosPDF, $logoPath, $firmaPath);
                 $pdf->generarPDF();
                 
                 $pdf->Output('I', 'Estado_Cuenta_' . $nro_fact . '.pdf');
@@ -193,7 +194,7 @@ switch ($metodo) {
     break;
 
     default:
-        require_once 'vista/cuentas_cobrar/index.php';
+        require_once 'src/vista/cuentas_cobrar/index.php';
         break;
 }
 ?>

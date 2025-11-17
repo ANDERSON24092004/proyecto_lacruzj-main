@@ -1,8 +1,8 @@
 <?php 
 
-use src\modelo\permiso;
+use src\modelo\permisoModelo;
 
-$permiso = new permiso();
+$permiso = new permisoModelo();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,6 +10,7 @@ $permiso = new permiso();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J.Lacruz</title>
+    
     <link rel="stylesheet" href="/proyecto-lacruz-j/assets/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use Exception;
 
-class DetalleFacturaCompra extends conexion
+class detalleFacturaCompraModelo extends conexion
 {
     private $id_fact;
     private $id_materia_prima;

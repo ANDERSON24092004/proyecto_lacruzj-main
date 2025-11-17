@@ -1,4 +1,4 @@
-<?php require_once('vista/parcial/header.php'); ?>
+<?php require_once('src/vista/parcial/header.php'); ?>
 
 <div class="main-content">
     <div class="container-fluid py-4">
@@ -45,10 +45,10 @@
     </div>
 </div>
 
-<?php require_once('vista/parcial/mensaje_modal.php'); ?>
-<?php require_once('vista/facturaCompra/crear.php'); ?>
-<?php require_once('vista/facturaCompra/anular.php'); ?>
-<?php require_once('vista/facturaCompra/reactivar.php'); ?>
-<?php require_once('vista/parcial/footer.php'); ?>
+<?php require_once('src/vista/parcial/mensaje_modal.php'); ?>
+<?php require_once('src/vista/facturaCompra/crear.php'); ?>
+<?php require_once('src/vista/facturaCompra/anular.php'); ?>
+<?php require_once('src/vista/facturaCompra/reactivar.php'); ?>
+<?php require_once('src/vista/parcial/footer.php'); ?>
 
 <script type="text/javascript" src="assets/js/mainFacturaCompra.js"></script>

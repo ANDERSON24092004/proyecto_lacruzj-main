@@ -1,7 +1,8 @@
 <?php
-require_once 'modelo/MateriaPrimaModelo.php';
-require_once 'modelo/UnidadMedidaModelo.php';
-require_once 'controlador/verificar_sesion.php';
+
+use src\modelo\materiaPrimaModelo;
+use src\modelo\unidadMedidaModelo;
+require_once 'src/controlador/verificar_sesion.php';
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -19,12 +20,12 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$materia = new MateriaPrima();
-$unidadMedida = new UnidadMedida();
+$materia = new materiaPrimaModelo();
+$unidadMedida = new unidadMedidaModelo();
 
 switch ($metodo) {
     case 'index':
-        require 'vista/materiaPrima/index.php';
+        require 'src/vista/materiaPrima/index.php';
     break;
 
     case 'listar':
@@ -147,7 +148,7 @@ switch ($metodo) {
 
     default:
         $materias = $materia->listar();
-        require_once 'vista/materiaPrima/index.php';
+        require_once 'src/vista/materiaPrima/index.php';
     break;
 }
 ?>

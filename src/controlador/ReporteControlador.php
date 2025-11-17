@@ -1,12 +1,12 @@
 <?php
 
-use src\modelo\ReporteVentasModelo;
-use src\modelo\ReporteComprasModelo;
-use src\modelo\ReporteComprasPDFModelo;
-use src\modelo\ReporteVentasPDFModelo;
-use src\modelo\ReporteServicioModelo;
-use src\modelo\ReporteMateriaPrimaModelo;
-use src\modelo\ReporteProductoModelo;
+use src\modelo\reporteVentasModelo;
+use src\modelo\reporteComprasModelo;
+use src\modelo\reporteComprasPDFModelo;
+use src\modelo\reporteVentasPDFModelo;
+use src\modelo\reporteServicioModelo;
+use src\modelo\reporteMateriaPrimaModelo;
+use src\modelo\reporteProductoModelo;
 
 require_once 'src/controlador/verificar_sesion.php';
 
@@ -28,8 +28,8 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$reporteVentasModelo = new ReporteVentasModelo();
-$reporteComprasModelo = new ReporteComprasModelo();
+$reporteVentasModelo = new reporteVentasModelo();
+$reporteComprasModelo = new reporteComprasModelo();
 
 switch ($metodo) {
     case 'index':
@@ -89,7 +89,7 @@ switch ($metodo) {
                 $anio
             );
             
-            $pdf = new ReporteVentasPDFModelo();
+            $pdf = new reporteVentasPDFModelo();
             $pdf->generarPDF($datosReporte);
             
         } catch (Exception $e) {
@@ -118,7 +118,7 @@ switch ($metodo) {
                 $anio
             );
             
-            $pdf = new ReporteComprasPDFModelo();
+            $pdf = new reporteComprasPDFModelo();
             $pdf->generarPDF($datosReporte);
             
         } catch (Exception $e) {
@@ -129,7 +129,7 @@ switch ($metodo) {
 
     case 'listarServicios':
         try {
-            $reporteServicio = new ReporteServicioModelo();
+            $reporteServicio = new reporteServicioModelo();
             $datosServicios = $reporteServicio->obtenerDatosServicios();
             $reporteServicio->generarPDF($datosServicios);
             
@@ -141,7 +141,7 @@ switch ($metodo) {
 
     case 'inventarioProductos':
         try {
-            $reporteProducto = new ReporteProductoModelo();
+            $reporteProducto = new reporteProductoModelo();
             $datosProductos = $reporteProducto->obtenerDatosProductos();
             $reporteProducto->generarPDF($datosProductos);
             
@@ -153,7 +153,7 @@ switch ($metodo) {
 
     case 'inventarioMateriasPrimas':
         try {
-            $reporteMateriaPrima = new ReporteMateriaPrimaModelo();
+            $reporteMateriaPrima = new reporteMateriaPrimaModelo();
             $datosMateriasPrimas = $reporteMateriaPrima->obtenerDatosMateriasPrimas();
             $reporteMateriaPrima->generarPDF($datosMateriasPrimas);
             
@@ -168,7 +168,7 @@ switch ($metodo) {
             $fecha = $_POST['fecha'] ?? date('Y-m-d');
             $datosReporte = $reporteVentasModelo->obtenerVentasPorDia($fecha);
             
-            $pdf = new ReporteVentasPDFModelo();
+            $pdf = new reporteVentasPDFModelo();
             $pdf->generarPDF($datosReporte, 'dia');
             
         } catch (Exception $e) {
@@ -183,7 +183,7 @@ switch ($metodo) {
             $fechaFin = $_POST['fecha_fin'] ?? null;
             $datosReporte = $reporteVentasModelo->obtenerVentasPorSemana($fechaInicio, $fechaFin);
             
-            $pdf = new ReporteVentasPDFModelo();
+            $pdf = new reporteVentasPDFModelo();
             $pdf->generarPDF($datosReporte, 'semana');
             
         } catch (Exception $e) {
@@ -198,7 +198,7 @@ switch ($metodo) {
             $anio = $_POST['anio'] ?? date('Y');
             $datosReporte = $reporteVentasModelo->obtenerVentasPorMes($mes, $anio);
             
-            $pdf = new ReporteVentasPDFModelo();
+            $pdf = new reporteVentasPDFModelo();
             $pdf->generarPDF($datosReporte, 'mes');
             
         } catch (Exception $e) {
@@ -212,7 +212,7 @@ switch ($metodo) {
             $anio = $_POST['anio'] ?? date('Y');
             $datosReporte = $reporteVentasModelo->obtenerVentasPorAnio($anio);
             
-            $pdf = new ReporteVentasPDFModelo();
+            $pdf = new reporteVentasPDFModelo();
             $pdf->generarPDF($datosReporte, 'anio');
             
         } catch (Exception $e) {
@@ -226,7 +226,7 @@ switch ($metodo) {
             $fecha = $_POST['fecha'] ?? date('Y-m-d');
             $datosReporte = $reporteComprasModelo->obtenerComprasPorDia($fecha);
             
-            $pdf = new ReporteComprasPDFModelo();
+            $pdf = new reporteComprasPDFModelo();
             $pdf->generarPDF($datosReporte, 'dia');
             
         } catch (Exception $e) {
@@ -241,7 +241,7 @@ switch ($metodo) {
             $fechaFin = $_POST['fecha_fin'] ?? null;
             $datosReporte = $reporteComprasModelo->obtenerComprasPorSemana($fechaInicio, $fechaFin);
             
-            $pdf = new ReporteComprasPDFModelo();
+            $pdf = new reporteComprasPDFModelo();
             $pdf->generarPDF($datosReporte, 'semana');
             
         } catch (Exception $e) {
@@ -256,7 +256,7 @@ switch ($metodo) {
             $anio = $_POST['anio'] ?? date('Y');
             $datosReporte = $reporteComprasModelo->obtenerComprasPorMes($mes, $anio);
             
-            $pdf = new ReporteComprasPDFModelo();
+            $pdf = new reporteComprasPDFModelo();
             $pdf->generarPDF($datosReporte, 'mes');
             
         } catch (Exception $e) {
@@ -270,7 +270,7 @@ switch ($metodo) {
             $anio = $_POST['anio'] ?? date('Y');
             $datosReporte = $reporteComprasModelo->obtenerComprasPorAnio($anio);
             
-            $pdf = new ReporteComprasPDFModelo();
+            $pdf = new reporteComprasPDFModelo();
             $pdf->generarPDF($datosReporte, 'anio');
             
         } catch (Exception $e) {
@@ -280,7 +280,7 @@ switch ($metodo) {
         break;
 
     default:
-        require 'vista/reportes.php';
+        require 'src/vista/reportes.php';
         break;
 }
 ?>

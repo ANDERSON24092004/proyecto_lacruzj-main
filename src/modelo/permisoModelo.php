@@ -3,7 +3,7 @@
 namespace src\modelo;
 
 use src\modelo\conexion;
-class permiso {
+class permisoModelo {
     private $pdo;
     
     public function __construct() {

@@ -4,7 +4,7 @@ use src\modelo\conexion;
 use PDO;
 use PDOException;
 use Exception;
-class FacturaCompra extends conexion
+class facturaCompraModelo extends conexion
 {
     private $id_fact_com;
     private $id_proveedor;

@@ -1,16 +1,19 @@
 <?php 
-require_once 'modelo/UnidadMedidaModelo.php';
-require_once 'modelo/CondicionPagoModelo.php';
-require_once 'modelo/IvaModelo.php';
-require_once 'modelo/DescuentoModelo.php';
-require_once 'modelo/PresentacionModelo.php';
-require_once 'controlador/verificar_sesion.php';
 
-$unidadMedida = new UnidadMedida();
-$condicionPago = new CondicionPago();
-$Iva = new Iva();
-$descuento = new Descuento();
-$presentacion = new Presentacion();
+use src\modelo\unidadMedidaModelo;
+use src\modelo\condicionPagoModelo;
+use src\modelo\ivaModelo;
+use src\modelo\descuentoModelo;
+use src\modelo\presentacionModelo;
+require_once 'src/controlador/verificar_sesion.php';
+
+
+
+$unidadMedida = new unidadMedidaModelo();
+$condicionPago = new condicionPagoModelo();
+$Iva = new ivaModelo();
+$descuento = new descuentoModelo();
+$presentacion = new presentacionModelo();
 
 $activeTab = $_GET['tab'] ?? 'condicion-pago';
 
@@ -22,7 +25,7 @@ switch ($metodo) {
         $descuentos = $descuento->listar();
         $presentaciones = $presentacion->listar();
         
-        require_once 'vista/configuracion/index.php';
+        require_once 'src/vista/configuracion/index.php';
         break;
         
     case 'crear':

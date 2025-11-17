@@ -1,5 +1,5 @@
 <?php
-require_once 'modelo/PresentacionModelo.php';
+use src\modelo\presentacionModelo;
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -17,7 +17,7 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$presentacion = new Presentacion();
+$presentacion = new presentacionModelo();
 $activeTab = $_GET['tab'] ?? $_POST['tab'] ?? 'presentacion';
 
 switch ($metodo) {

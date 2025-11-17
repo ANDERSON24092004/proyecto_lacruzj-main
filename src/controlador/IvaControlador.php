@@ -1,12 +1,14 @@
 <?php
-require_once 'modelo/IvaModelo.php';
 
-function isAjaxRequest() {
-    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+use src\modelo\ivaModelo;
+function isAjaxRequest()
+{
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-function sendJsonResponse($success, $message, $details = '', $data = []) {
+function sendJsonResponse($success, $message, $details = '', $data = [])
+{
     header('Content-Type: application/json');
     echo json_encode([
         'success' => $success,
@@ -17,19 +19,19 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$Iva = new Iva();
+$Iva = new ivaModelo();
 $activeTab = $_GET['tab'] ?? $_POST['tab'] ?? 'iva';
 
 switch ($metodo) {
     case 'index':
         $iva = $Iva->listar();
-        require 'vista/configuracion/index.php';
+        require 'src/vista/configuracion/index.php';
         break;
-        
+
     case 'crear':
-        require 'vista/configuracion/index.php';
+        require 'src/vista/configuracion/index.php';
         break;
-        
+
     case 'listarAjax':
         if (isAjaxRequest()) {
             try {
@@ -64,7 +66,7 @@ switch ($metodo) {
                 }
 
                 $porcentaje = trim($_POST['porcentaje']);
-          
+
                 if (!is_numeric($porcentaje) || $porcentaje < 0 || $porcentaje > 100) {
                     sendJsonResponse(false, "Error en el registro", "El porcentaje debe ser un número entre 0 y 100");
                 }
@@ -95,7 +97,7 @@ switch ($metodo) {
                 }
 
                 $porcentaje = trim($_POST['porcentaje']);
-                
+
                 if (!is_numeric($porcentaje) || $porcentaje < 0 || $porcentaje > 100) {
                     sendJsonResponse(false, "Error en la actualización", "El porcentaje debe ser un número entre 0 y 100");
                 }
@@ -117,14 +119,14 @@ switch ($metodo) {
     case 'eliminarAjax':
         if (isAjaxRequest()) {
             $id_iva = $_POST['id_iva'] ?? null;
-            
+
             if (!$id_iva) {
                 sendJsonResponse(false, "Error en la eliminación", "ID de IVA no proporcionado");
             }
 
             try {
                 $Iva->setIdIva($id_iva);
-                
+
                 if ($Iva->eliminar()) {
                     sendJsonResponse(true, "IVA eliminado correctamente", "Se eliminó el IVA con ID " . $id_iva);
                 } else {
@@ -136,4 +138,3 @@ switch ($metodo) {
         }
         break;
 }
-?>

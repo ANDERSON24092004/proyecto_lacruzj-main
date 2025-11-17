@@ -4,7 +4,7 @@ use src\modelo\conexion;
 use PDO;
 use PDOException;
 
-class CondicionPago extends conexion {
+class condicionPagoModelo extends conexion {
     private $id_condicion_pago;
     private $forma;
 

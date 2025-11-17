@@ -1,4 +1,4 @@
-<?php require_once 'vista/parcial/header.php.php'; ?>
+<?php require_once 'src/vista/parcial/header.php.php'; ?>
 <?php
 require_once 'modelo/TasaCambio.php';
 $tasaCambio = new TasaCambio();
@@ -87,5 +87,5 @@ $tasaPersonalizada = $tasaCambio->obtenerTasa('personalizada');
     }
 </script>
 
-<?php require_once 'vista/parcial/footer.php.php'; ?>
+<?php require_once 'src/vista/parcial/footer.php.php'; ?>
 

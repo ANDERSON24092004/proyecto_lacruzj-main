@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use Exception;
 
-class ReporteVentasModelo extends conexion {
+class reporteVentasModelo extends conexion {
     
     public function obtenerVentasPorDia($fecha = null) {
         try {

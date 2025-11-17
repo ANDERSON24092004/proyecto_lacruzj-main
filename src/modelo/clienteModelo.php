@@ -5,7 +5,7 @@ use src\modelo\conexion;
 use PDO;
 use PDOException;
 use Exception;
-class ClienteModel extends conexion {
+class clienteModelo extends conexion {
 
     private $rif;
     private $razon_social;

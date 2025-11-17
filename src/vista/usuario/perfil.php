@@ -1,6 +1,6 @@
 <?php
 $titulo_pagina = "Mi Perfil";
-require_once 'vista/parcial/header.php';
+require_once 'src/vista/parcial/header.php';
 ?>
 
 <div class="container-fluid py-4">
@@ -111,7 +111,7 @@ require_once 'vista/parcial/header.php';
     </div>
 </div>
 
-<?php require_once 'vista/parcial/mensaje_modal.php'; ?>
+<?php require_once 'src/vista/parcial/mensaje_modal.php'; ?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -358,4 +358,4 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
-<?php require_once 'vista/parcial/footer.php'; ?>
+<?php require_once 'src/vista/parcial/footer.php'; ?>

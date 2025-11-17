@@ -1,15 +1,14 @@
 <?php
-require_once 'modelo/Usuario.php';
 
+use src\modelo\usuarioModelo;
 switch ($metodo) {
     case 'login':
         if (isset($_SESSION['usuario'])) {
             header("Location: index.php?c=login&m=home");
             exit;
         }
-        require 'vista/login.php';
+        require 'src/vista/login.php';
         break;
-
     case 'validar':
         if (isset($_SESSION['usuario'])) {
             header("Location: index.php?c=login&m=home");
@@ -21,11 +20,11 @@ switch ($metodo) {
 
         if (empty($usuario) || empty($clave)) {
             $error = "Usuario y clave son obligatorios.";
-            require 'vista/login.php';
+            require 'src/vista/login.php';
             exit;
         }
 
-        $u = new Usuario();
+        $u = new usuarioModelo();
         $usuarioEncontrado = $u->buscarPorCredenciales($usuario);
 
         if ($usuarioEncontrado && password_verify($clave, $usuarioEncontrado['clave'])) {
@@ -39,7 +38,7 @@ switch ($metodo) {
             exit;
         } else {
             $error = "Usuario o clave incorrectos.";
-            require 'vista/login.php';
+            require 'src/vista/login.php';
         }
         break;
 
@@ -55,7 +54,7 @@ switch ($metodo) {
             header("Location: index.php?c=login&m=login");
             exit;
         }
-        require 'vista/parcial/home.php';
+        require 'src/vista/parcial/home.php';
         break;
         
     default:

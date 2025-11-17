@@ -3,7 +3,7 @@
 namespace src\modelo;
 use FPDF;
 
-class ReporteMateriaPrimaModelo extends FPDF {
+class reporteMateriaPrimaModelo extends FPDF {
     private $datosReporte;
     
     public function __construct($datosReporte = []) {

@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 
 
-class Descuento extends conexion {
+class descuentoModelo extends conexion {
     private $id;
     private $porcentaje;
 

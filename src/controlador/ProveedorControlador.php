@@ -1,13 +1,17 @@
 <?php
-require_once 'modelo/ProveedorModelo.php';
-require_once 'controlador/verificar_sesion.php';
 
-function isAjaxRequest() {
-    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-           strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+use src\modelo\proveedorModelo;
+
+require_once 'src/controlador/verificar_sesion.php';
+
+function isAjaxRequest()
+{
+    return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+        strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-function sendJsonResponse($success, $message, $details = '', $data = []) {
+function sendJsonResponse($success, $message, $details = '', $data = [])
+{
     header('Content-Type: application/json');
     echo json_encode([
         'success' => $success,
@@ -18,11 +22,11 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$proveedorModelo = new Proveedor();
+$proveedorModelo = new proveedorModelo();
 
 switch ($metodo) {
     case 'index':
-        require 'vista/proveedores/index.php';
+        require 'src/vista/proveedores/index.php';
         break;
 
     case 'listarAjax':
@@ -90,14 +94,14 @@ switch ($metodo) {
     case 'eliminarAjax':
         if (isAjaxRequest()) {
             $id_proveedores = $_POST['id_proveedores'] ?? null;
-            
+
             if (!$id_proveedores) {
                 sendJsonResponse(false, "Error en la eliminación", "ID de proveedor no proporcionado");
             }
 
             try {
                 $proveedorModelo->setIdProveedores($id_proveedores);
-                
+
                 if ($proveedorModelo->eliminar()) {
                     sendJsonResponse(true, "Proveedor eliminado exitosamente", "Se eliminó el proveedor con RIF " . $id_proveedores);
                 }
@@ -111,9 +115,9 @@ switch ($metodo) {
         if (isAjaxRequest() && isset($_POST['rif'])) {
             $rif = $_POST['rif'];
             $excluirId = $_POST['excluir_id'] ?? null;
-            
+
             $existe = $proveedorModelo->existeRif($rif, $excluirId);
-            
+
             header('Content-Type: application/json');
             echo json_encode(['existe' => $existe]);
             exit;
@@ -138,7 +142,7 @@ switch ($metodo) {
             $_SESSION['mensaje'] = "Error en el registro";
             $_SESSION['mensaje_detalle'] = $e->getMessage();
         }
-        
+
         header("Location: index.php?c=ProveedorControlador&m=index");
         break;
 
@@ -160,13 +164,13 @@ switch ($metodo) {
             $_SESSION['mensaje'] = "Error en la actualización";
             $_SESSION['mensaje_detalle'] = $e->getMessage();
         }
-        
+
         header("Location: index.php?c=ProveedorControlador&m=index");
         break;
 
     case 'eliminar':
         $id_proveedores = $_GET['id_proveedores'] ?? $_GET['id'] ?? null;
-        
+
         if (!$id_proveedores) {
             $_SESSION['tipo_mensaje'] = "error";
             $_SESSION['mensaje'] = "Error en la eliminación";
@@ -177,7 +181,7 @@ switch ($metodo) {
 
         try {
             $proveedorModelo->setIdProveedores($id_proveedores);
-            
+
             if ($proveedorModelo->eliminar()) {
                 $_SESSION['tipo_mensaje'] = "success";
                 $_SESSION['mensaje'] = "Proveedor eliminado exitosamente";
@@ -188,8 +192,7 @@ switch ($metodo) {
             $_SESSION['mensaje'] = "Error en la eliminación";
             $_SESSION['mensaje_detalle'] = $e->getMessage();
         }
-        
+
         header("Location: index.php?c=ProveedorControlador&m=index");
         break;
 }
-?>

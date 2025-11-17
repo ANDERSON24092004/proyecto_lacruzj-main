@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use Exception;
 
-class MateriaPrima extends conexion
+class materiaPrimaModelo extends conexion
 {
     private $id_materia;
     private $id_unidad_medida;

@@ -1,7 +1,7 @@
 <?php
 namespace src\modelo;
 use FPDF;
-class FacturaPDFModelo extends FPDF {
+class facturaPDFModelo extends FPDF {
     private $facturaData;
     private $logoPath;
     private $firmaPath;

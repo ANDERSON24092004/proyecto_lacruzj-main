@@ -4,7 +4,7 @@ use src\modelo\conexion;
 use PDO;
 use PDOException;
 
-class Presentacion extends conexion {
+class presentacionModelo extends conexion {
     private $id_pres;
     private $nombre;
 

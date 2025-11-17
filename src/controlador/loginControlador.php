@@ -1,5 +1,6 @@
 <?php
-require_once 'modelo/Usuario.php';
+
+use src\modelo\usuarioModelo;
 
 switch ($metodo) {
     case 'login':
@@ -7,7 +8,7 @@ switch ($metodo) {
             header("Location: index.php?c=loginControlador&m=home");
             exit;
         }
-        require 'vista/login.php';
+        require 'src/vista/login.php';
         break;
 
     case 'crearUsuario':
@@ -68,7 +69,7 @@ switch ($metodo) {
             $claveHash = password_hash($clave, PASSWORD_DEFAULT);
             $id_rol_oficina = 2;
 
-            $usuario = new Usuario();
+            $usuario = new usuarioModelo();
             $resultado = $usuario->registrar($cedula, $id_rol_oficina, $nombre, $telefono, $correo, $claveHash);
 
             if ($resultado) {
@@ -101,7 +102,7 @@ switch ($metodo) {
             exit;
         }
 
-        $u = new Usuario();
+        $u = new usuarioModelo();
         $usuarioEncontrado = $u->buscarPorCredenciales($usuario);
 
         if (!$usuarioEncontrado) {
@@ -140,7 +141,7 @@ switch ($metodo) {
             header("Location: index.php?c=loginControlador&m=login");
             exit;
         }
-        require 'vista/parcial/home.php';
+        require 'src/vista/parcial/home.php';
         break;
         
     default:

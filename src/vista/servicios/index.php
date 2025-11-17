@@ -1,4 +1,4 @@
-<?php require_once('vista/parcial/header.php'); ?>
+<?php require_once('src/vista/parcial/header.php'); ?>
 
 <div class="main-content">
     <div class="container-fluid py-4">
@@ -74,11 +74,11 @@
     </div>
 </div>
 
-<?php include_once('vista/servicios/crear.php'); ?>
-<?php include_once('vista/servicios/editar.php'); ?>
-<?php include_once('vista/servicios/eliminar.php'); ?>
-<?php require_once('vista/parcial/footer.php'); ?>
+<?php include_once('src/vista/servicios/crear.php'); ?>
+<?php include_once('src/vista/servicios/editar.php'); ?>
+<?php include_once('src/vista/servicios/eliminar.php'); ?>
+<?php require_once('src/vista/parcial/footer.php'); ?>
 
-<script type="text/javascript" src="vista/js/editarServicio.js"></script>
-<script type="text/javascript" src="vista/js/eliminar.js"></script>
-<script type="text/javascript" src="vista/js/mainServicio.js"></script>
+<script type="text/javascript" src="src/vista/js/editarServicio.js"></script>
+<script type="text/javascript" src="src/vista/js/eliminar.js"></script>
+<script type="text/javascript" src="src/vista/js/mainServicio.js"></script>

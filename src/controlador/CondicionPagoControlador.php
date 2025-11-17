@@ -1,5 +1,5 @@
 <?php
-require_once 'modelo/CondicionPagoModelo.php';
+use src\modelo\condicionPagoModelo;
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -17,17 +17,17 @@ function sendJsonResponse($success, $message, $details = '', $data = []) {
     exit;
 }
 
-$condicionPago = new CondicionPago();
+$condicionPago = new condicionPagoModelo();
 $activeTab = $_GET['tab'] ?? $_POST['tab'] ?? 'condicion-pago';
 
 switch ($metodo) {
     case 'index':
         $condicion = $condicionPago->listar();
-        require 'vista/configuracion/index.php';
+        require 'src/vista/configuracion/index.php';
         break;
         
     case 'crear':
-        require 'vista/configuracion/index.php';
+        require 'src/vista/configuracion/index.php';
         break;
         
     case 'listarAjax':

@@ -4,7 +4,7 @@ use src\modelo\conexion;
 use PDO;
 use PDOException;
 use Exception;
-class CuentasCobrarModel extends conexion {
+class cuentasCobrarModelo extends conexion {
     
     public function listarFacturasCredito() {
     try {

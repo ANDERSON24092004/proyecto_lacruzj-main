@@ -1,23 +1,23 @@
 <?php
-require_once 'modelo/Usuario.php';
+use src\modelo\usuarioModelo;
 
 function isAjaxRequest() {
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 }
 
-$usuario = new Usuario();
+$usuario = new usuarioModelo();
 
 switch ($metodo) {
     case 'index':    
         $usuarios = $usuario->listar();
         $roles = $usuario->listarRol();
-        require 'vista/usuario/index.php';
+        require 'src/vista/usuario/index.php';
         break;
 
     case 'crear':
         $roles = $usuario->listarRol();
-        require 'vista/usuario/crear.php';
+        require 'src/vista/usuario/crear.php';
         break;
 
     case 'guardar':
@@ -90,7 +90,7 @@ switch ($metodo) {
         }
         
         $usuarios = $usuario->listar();
-        require 'vista/usuario/index.php';
+        require 'src/vista/usuario/index.php';
         break;  
            
     case 'actualizar':
@@ -157,7 +157,7 @@ switch ($metodo) {
 
     default:
         $usuarios = $usuario->listar();
-        require_once 'vista/usuario/index.php';
+        require_once 'src/vista/usuario/index.php';
         break;
 }
 ?>
